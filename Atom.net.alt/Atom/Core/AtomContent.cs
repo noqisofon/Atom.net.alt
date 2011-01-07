@@ -1,3 +1,4 @@
+/* -*- encoding: utf-8 -*- */
 using System;
 using System.Text;
 using System.Xml.XPath;
@@ -10,70 +11,58 @@ namespace Atom.Core {
 
     using Atom.Utils;
 
-    
+
 
     /// <summary>
     /// 
     /// </summary>
     [Serializable]
-    public class AtomContent : AtomContentBase {
+    public class AtomContent : AtomContentConstruct {
         #region constructors
         /// <summary>
         /// 
         /// </summary>
         public AtomContent()
-        : this( string.Empty, DefaultValues.mediaType, DefaultValues.encodedMode ) {
+            : this( string.Empty, DefaultValues.mediaType, DefaultValues.encodedMode ) {
         }
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="local_name"></param>
-        public AtomContent(string local_name)
-            : this( local_name, string.Empty ) {
-
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="local_name"></param>
         /// <param name="content"></param>
-        public AtomContent(string local_name, string content)
-            : this( local_name, content, DefaultValues.mediaType, DefaultValues.encodedMode ) {
-
-        }
-        public AtomContent(string local_name, string content, MediaType type)
-            : this( local_name, content, type, DefaultValues.encodedMode ) {
+        public AtomContent(string content)
+            : this( content, DefaultValues.mediaType, DefaultValues.encodedMode ) {
 
         }
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="local_name"></param>
         /// <param name="content"></param>
         /// <param name="type"></param>
-        public AtomContent(string local_name, string content, EncodedMode mode)
-            : this( local_name, content, DefaultValues.mediaType, mode ) {
+        public AtomContent(string content, MediaType type)
+            : this( content, type, DefaultValues.encodedMode ) {
 
         }
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="local_name"></param>
+        /// <param name="content"></param>
+        /// <param name="mode"></param>
+        public AtomContent(string content, EncodedMode mode)
+            : this( content, DefaultValues.mediaType, mode ) {
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="content"></param>
         /// <param name="type"></param>
         /// <param name="mode"></param>
-        public AtomContent(string local_name, string content, MediaType type, EncodedMode mode) {
-            base.LocalName = local_name;
-            this.Content = content;
-            this.Type = type;
-            this.Mode = mode;
+        public AtomContent(string content, MediaType type, EncodedMode mode)
+            : base( "content", content, type, mode ) {
         }
         #endregion constructors
 
 
-        public override string LocalName {
-            get { return "content"; }
-        }
 
 
         #region ToString-helper-methods

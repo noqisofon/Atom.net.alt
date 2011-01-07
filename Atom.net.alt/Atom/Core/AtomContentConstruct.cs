@@ -1,3 +1,4 @@
+/* -*- encoding: utf-8 -*- */
 using System;
 using System.Text;
 using System.Xml.XPath;
@@ -15,19 +16,19 @@ namespace Atom.Core {
     /// 
     /// </summary>
     [Serializable]
-    public class AtomContentBase : AtomElement {
+    public class AtomContentConstruct : AtomElement {
         #region constructors
         /// <summary>
         /// 
         /// </summary>
-        public AtomContentBase()
+        public AtomContentConstruct()
             : this( "title" ) {
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="local_name"></param>
-        public AtomContentBase(string local_name)
+        public AtomContentConstruct(string local_name)
             : this( local_name, string.Empty ) {
 
         }
@@ -36,7 +37,7 @@ namespace Atom.Core {
         /// </summary>
         /// <param name="local_name"></param>
         /// <param name="content"></param>
-        public AtomContentBase(string local_name, string content)
+        public AtomContentConstruct(string local_name, string content)
             : this( local_name, content, DefaultValues.mediaType, DefaultValues.encodedMode ) {
 
         }
@@ -46,7 +47,7 @@ namespace Atom.Core {
         /// <param name="local_name"></param>
         /// <param name="content"></param>
         /// <param name="type"></param>
-        public AtomContentBase(string local_name, string content, MediaType type)
+        public AtomContentConstruct(string local_name, string content, MediaType type)
             : this( local_name, content, type, DefaultValues.encodedMode ) {
 
         }
@@ -57,7 +58,7 @@ namespace Atom.Core {
         /// <param name="content"></param>
         /// <param name="type"></param>
         /// <param name="mode"></param>
-        public AtomContentBase(string local_name, string content, MediaType type, EncodedMode mode) {
+        public AtomContentConstruct(string local_name, string content, MediaType type, EncodedMode mode) {
             base.LocalName = local_name;
             this.Content = content;
             this.Type = type;
@@ -101,32 +102,35 @@ namespace Atom.Core {
         #endregion properties
 
 
+        #region ToString-method
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         public override string ToString() {
-            this.writeStartElement();
+            try {
+                this.writeStartElement();
 
-            if ( this.Content.Length == 0 )
-                throw new RequiredElementNotFoundException( "The content cannot be empty" );
+                if ( this.Content.Length == 0 )
+                    throw new RequiredElementNotFoundException( "The content cannot be empty" );
 
-            if ( this.Mode == EncodedMode.Escaped )
-                this.Content = Utils.AtomUtility.Escape( this.Content );
+                if ( this.Mode == EncodedMode.Escaped )
+                    this.Content = Utils.AtomUtility.Escape( this.Content );
 
-            base.buffer.Append( this.Content );
-            this.writeEndElement();
+                base.buffer.Append( this.Content );
+                this.writeEndElement();
 
-            string result = this.buffer.ToString();
-            this.buffer.Length = 0;
-
-            return result;
+                return this.buffer.ToString();
+            } finally {
+                base.buffer.Length = 0;
+            }
         }
+        #endregion ToString-method
 
 
         #region ToString-helper-methods
         protected internal override void writeStartElement() {
-            this.buffer.AppendFormat( "<{0}", this.LocalName );
+            base.buffer.AppendFormat( "<{0}", this.LocalName );
 
             if ( ( this.Type == MediaType.UnknownType )
                  || ( this.Type == MediaType.ApplicationAtomXml )
@@ -140,6 +144,7 @@ namespace Atom.Core {
                 base.writeAttribute( "mode", this.Mode.ToString().ToLower(), false, null );
 
             base.writeAttribute( "xml:lang", AtomUtility.languageAsString( base.XmlLang ).ToString(), false, null );
+            base.buffer.Append( ">" );
         }
 
 
@@ -153,8 +158,13 @@ namespace Atom.Core {
 
 
         #region xpath-parsing-stuff
-        internal static AtomContentBase parse(XPathNavigator navigator) {
-            AtomContentBase result_content = new AtomContentBase();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="navigator"></param>
+        /// <returns></returns>
+        internal static AtomContentConstruct parse(XPathNavigator navigator) {
+            AtomContentConstruct result_content = new AtomContentConstruct();
             string content = string.Empty;
 
             XPathNavigator temp_navigator = navigator.Clone();

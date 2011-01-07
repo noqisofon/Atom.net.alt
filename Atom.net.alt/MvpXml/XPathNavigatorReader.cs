@@ -1,3 +1,4 @@
+/* -*- encoding: utf-8 -*- */
 using System;
 using System.IO;
 using System.Net;
@@ -69,7 +70,7 @@ namespace MvpXml {
         #endregion property
 
 
-        #region methods
+        #region public-methods
         /// <summary>
         /// 
         /// </summary>
@@ -87,7 +88,7 @@ namespace MvpXml {
         public override string GetAttribute(string name, string namespaceURI) {
             return this[name, namespaceURI];
         }
-        #endregion methods
+        #endregion public-methods
 
 
         #region IXmlSerializable-members

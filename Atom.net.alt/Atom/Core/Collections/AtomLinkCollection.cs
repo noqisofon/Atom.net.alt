@@ -9,10 +9,9 @@ namespace Atom.Core.Collections {
 
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
-    [Serializable]
-    public class AtomContentCollection : Collection<AtomContent> {
+    public class AtomLinkCollection : Collection<AtomLink> {
     }
 
 

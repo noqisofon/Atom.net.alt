@@ -10,19 +10,17 @@ namespace Atom.Core {
     /// <summary>
     ///
     /// </summary>
-    public enum EncodedMode {
+    public class AtomLink : AtomElement {
+        #region fields
         /// <summary>
         /// 
         /// </summary>
-        Xml,
+        private Relationship rel_ = DefaultValues.Rel;
         /// <summary>
         /// 
         /// </summary>
-        Escaped,
-        /// <summary>
-        /// 
-        /// </summary>
-        Base64
+        private MediaType type_ = DefaultValues.MediaType;
+        #endregion fields
     }
 
 

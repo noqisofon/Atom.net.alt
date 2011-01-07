@@ -1,3 +1,4 @@
+/* -*- encoding: utf-8 -*- */
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -90,7 +91,7 @@ namespace Atom.Utils {
         /// <summary>
         /// 
         /// </summary>
-        internal static Uri uri {
+        internal static Uri Uri {
             get {
                 return default_uri;
             }
@@ -100,7 +101,7 @@ namespace Atom.Utils {
         /// <summary>
         /// 
         /// </summary>
-        public const int intValue = -1;
+        public const int Int = -1;
 
 
         /// <summary>
@@ -112,7 +113,7 @@ namespace Atom.Utils {
         /// <summary>
         /// 
         /// </summary>
-        internal static DateTime dateTime {
+        internal static DateTime DateTime {
             get { return date_time; }
         }
     }

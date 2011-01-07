@@ -1,3 +1,4 @@
+/* -*- encoding: utf-8 -*- */
 using System;
 using System.Net;
 using System.Text;
@@ -10,7 +11,8 @@ using MvpXml;
 namespace Atom.Core {
 
 
-    using Utils;
+    using Atom.Core.Collections;
+    using Atom.Utils;
 
 
     /// <summary>
@@ -18,6 +20,56 @@ namespace Atom.Core {
     /// </summary>
     [Serializable]
     public class AtomFeed : AtomElement {
+        /// <summary>
+        /// 
+        /// </summary>
+        public AtomFeed() { }
+
+
+        #region properties
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Version {
+            get { return DefaultValues.AtomVersion; }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
+        public AtomContentConstruct Title {
+            get {
+                return this.title_;
+            }
+            set {
+                this.title_ = value;
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public AtomLinkCollection Links {
+            get { return this.links_; }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public AtomPersonConstruct Author {
+            get {
+                return this.author_;
+            }
+            set {
+                this.author_ = value;
+            }
+        }
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -29,6 +81,7 @@ namespace Atom.Core {
                 this.feed_uri_ = value;
             }
         }
+        #endregion properties
 
 
         /// <summary>
@@ -101,20 +154,20 @@ namespace Atom.Core {
                         break;
 
                     case "title":
-                        AtomContentBase content = AtomContentBase.parse( it.Current );
+                        AtomContentConstruct content = AtomContentConstruct.parse( it.Current );
                         result_feed.Title = content;
                         break;
 
                     case "link":
-                        result_feed.Links.Add( AtomLink.parse( it.Current ) );
+                        result_feed.Links.Add( AtomLinkConstruct.parse( it.Current ) );
                         break;
 
                     case "author":
-                        result_feed.Author = AtomPerson.parse( it.Current );
+                        result_feed.Author = AtomPersonConstruct.parse( it.Current );
                         break;
 
                     case "contributor":
-                        result_feed.Contributors.Add( AtomPerson.parse( it.Current ) );
+                        result_feed.Contributors.Add( AtomPersonConstruct.parse( it.Current ) );
                         break;
 
                     case "tagline":
@@ -167,10 +220,52 @@ namespace Atom.Core {
         }
 
 
+        #region fields
+        /// <summary>
+        /// 
+        /// </summary>
+        private AtomContentConstruct title_ = null;
+        /// <summary>
+        /// 
+        /// </summary>
+        private AtomLinkCollection links_ = new AtomLinkCollection();
+        /// <summary>
+        /// 
+        /// </summary>
+        private AtomPersonConstruct author_ = null;
+        /// <summary>
+        /// 
+        /// </summary>
+        private AtomPersonConstructCollection contributors = new AtomPersonConstructCollection();
+        /// <summary>
+        /// 
+        /// </summary>
+        private AtomContentConstruct tagline_ = null;
+        /// <summary>
+        /// 
+        /// </summary>
+        private Uri id_ = DefaultValues.Uri;
         /// <summary>
         /// 
         /// </summary>
         private Uri feed_uri_ = null;
+        /// <summary>
+        /// 
+        /// </summary>
+        private AtomGenerator generator_ = new AtomGenerator();
+        /// <summary>
+        /// 
+        /// </summary>
+        private AtomContentConstruct copyright_ = null;
+        /// <summary>
+        /// 
+        /// </summary>
+        private AtomContentConstruct info_ = null;
+        /// <summary>
+        /// 
+        /// </summary>
+        private AtomDateConstruct updated_ = null;
+        #endregion fields
 
 
         /// <summary>

@@ -1,3 +1,4 @@
+/* -*- encoding: utf-8 -*- */
 using System;
 using System.Net;
 using System.Text;
@@ -114,7 +115,7 @@ namespace Atom.Core {
         /// <param name="required"></param>
         /// <param name="message"></param>
         protected internal void writeElement(string local_name, DateTime input, bool required, string message) {
-            if ( input != DefaultValues.dateTime ) {
+            if ( input != DefaultValues.DateTime ) {
                 this.buffer.AppendFormat( "<{0}>", local_name );
                 this.buffer.Append( Convert.ToString( input ) );
                 this.buffer.AppendFormat( "</{0}>", local_name );
@@ -162,7 +163,7 @@ namespace Atom.Core {
         /// <param name="required"></param>
         /// <param name="message"></param>
         protected internal void writeElement(string local_name, Uri input, bool required, string message) {
-            if ( input != DefaultValues.uri ) {
+            if ( input != DefaultValues.Uri ) {
                 this.buffer.AppendFormat( "<{0}>", local_name );
                 this.buffer.Append( Convert.ToString( input ) );
                 this.buffer.AppendFormat( "</{0}>", local_name );
@@ -178,7 +179,7 @@ namespace Atom.Core {
         /// <param name="required"></param>
         /// <param name="message"></param>
         protected internal void writeElement(string local_name, object input, bool required, string message) {
-            if ( input as Uri != DefaultValues.uri ) {
+            if ( input as Uri != DefaultValues.Uri ) {
                 this.buffer.AppendFormat( "<{0}>", local_name );
                 this.buffer.Append( Convert.ToString( input ) );
                 this.buffer.AppendFormat( "</{0}>", local_name );
@@ -198,7 +199,7 @@ namespace Atom.Core {
         /// <param name="required"></param>
         /// <param name="message"></param>
         protected internal void writeAttribute(string local_name, DateTime input, bool required, string message) {
-            if ( input != DefaultValues.dateTime )
+            if ( input != DefaultValues.DateTime )
                 this.buffer.AppendFormat( "{0}=\"{1}\"", local_name, Convert.ToString( input ) );
             else if ( required )
                 throw new RequiredAttributeNotFoundException( string.Concat( local_name, " ", message ) );
@@ -211,7 +212,7 @@ namespace Atom.Core {
         /// <param name="required"></param>
         /// <param name="message"></param>
         protected internal void writeAttribute(string local_name, int input, bool required, string message) {
-            if ( input != DefaultValues.intValue )
+            if ( input != DefaultValues.Int )
                 this.buffer.AppendFormat( "{0}=\"{1}\"", local_name, Convert.ToString( input ) );
             else if ( required )
                 throw new RequiredAttributeNotFoundException( string.Concat( local_name, " ", message ) );
@@ -237,7 +238,7 @@ namespace Atom.Core {
         /// <param name="required"></param>
         /// <param name="message"></param>
         protected internal void writeAttribute(string local_name, Uri input, bool required, string message) {
-            if ( input != DefaultValues.uri )
+            if ( input != DefaultValues.Uri )
                 this.buffer.AppendFormat( "{0}=\"{1}\"", local_name, Convert.ToString( input ) );
             else if ( required )
                 throw new RequiredAttributeNotFoundException( string.Concat( local_name, " ", message ) );
@@ -250,7 +251,7 @@ namespace Atom.Core {
         /// <param name="required"></param>
         /// <param name="message"></param>
         protected internal void writeAttribute(string local_name, object input, bool required, string message) {
-            if ( input as Uri != DefaultValues.uri )
+            if ( input as Uri != DefaultValues.Uri )
                 this.buffer.AppendFormat( "{0}=\"{1}\"", local_name, Convert.ToString( input ) );
             else if ( required )
                 throw new RequiredAttributeNotFoundException( string.Concat( local_name, " ", message ) );
@@ -292,7 +293,7 @@ namespace Atom.Core {
         /// <summary>
         /// 
         /// </summary>
-        private Uri xmlbase_ = DefaultValues.uri;
+        private Uri xmlbase_ = DefaultValues.Uri;
         #endregion fields
 
 
