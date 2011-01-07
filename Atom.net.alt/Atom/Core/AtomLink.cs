@@ -7,6 +7,9 @@ using System.Text;
 namespace Atom.Core {
 
 
+    using Atom.Utils;
+
+
     /// <summary>
     ///
     /// </summary>

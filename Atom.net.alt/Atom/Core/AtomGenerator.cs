@@ -35,9 +35,9 @@ namespace Atom.Core {
         /// <returns></returns>
         public override string ToString() {
             try {
-                this.WriteStartElement();
+                this.writeStartElement();
                 base.buffer.Append( this.content_ );
-                this.WriteEndElement();
+                this.writeEndElement();
 
                 return base.buffer.ToString();
             } finally {

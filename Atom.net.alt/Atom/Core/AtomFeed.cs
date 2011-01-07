@@ -159,7 +159,7 @@ namespace Atom.Core {
                         break;
 
                     case "link":
-                        result_feed.Links.Add( AtomLinkConstruct.parse( it.Current ) );
+                        result_feed.Links.Add( AtomLink.parse( it.Current ) );
                         break;
 
                     case "author":
