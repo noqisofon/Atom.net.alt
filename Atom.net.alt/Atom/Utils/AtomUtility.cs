@@ -46,16 +46,31 @@ namespace Atom.Utils {
 
 
         #region public-methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <returns></returns>
         public static string Escape(string buffer) {
             return HttpUtility.HtmlEncode( buffer );
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <returns></returns>
         public static string Unescape(string buffer) {
             return HttpUtility.HtmlDecode( buffer );
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="the_date"></param>
+        /// <returns></returns>
         public static bool IsIso8601Date(string the_date) {
             string rexpression =  @"\d\d\d\d(-\d\d(-\d\d(T\d\d:\d\d(:\d\d(\.\d*)?)?(Z|([+-]\d\d:\d\d))?)?)?)?$";
             Regex re = new Regex( rexpression, RegexOptions.IgnoreCase );
@@ -67,6 +82,11 @@ namespace Atom.Utils {
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="the_date"></param>
+        /// <returns></returns>
         public static bool IsIso8601DateTZ(string the_date) {
             if ( IsIso8601Date( the_date ) ) {
                 string rexpression = @"Z|([+-]\d\d:\d\d)$";
