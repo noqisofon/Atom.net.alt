@@ -1,21 +1,21 @@
 Atom.NET.alt
 ===============================================================================
-Atom.NET.alt �� Atom.net �̖ڃR�s�t�H�[�N�o�[�W�����ł��B
+Atom.NET.alt は Atom.net の目コピフォークバージョンです。
 
 
-�C�����e
+修正内容
 ===============================================================================
-�C�����e�͈ȉ��̂Ƃ���ł��B�����Ă���Ƃ��낪���邩������܂���B
+修正内容は以下のとおりです。抜けているところがあるかもしれません。
 
-* AtomContentConstruct �N���X�� AtomContentBase �N���X�ɕύX�B
-* AtomNSUri �̒��g�� new Uri( "http://www.w3.org/2005/Atom" )�ɕύX�B
-* Base64 �Ɋւ��郁�\�b�h�� Base64 �N���X�ɂ܂Ƃ߂��B
-* Utils �N���X�� AtomUtility �N���X�ɕύX�B
-* Mode �񋓑̂� EncodedMode �񋓑̂ɕύX�B
-* internal �ȃ��\�b�h�� lowerCamelCase �ɕύX�B
+* AtomContentConstruct クラスを AtomContentBase クラスに変更。
+* AtomNSUri の中身を new Uri( "http://www.w3.org/2005/Atom" )に変更。
+* Base64 に関するメソッドを Base64 クラスにまとめた。
+* Utils クラスを AtomUtility クラスに変更。
+* Mode 列挙体を EncodedMode 列挙体に変更。
+* internal なメソッドを lowerCamelCase に変更。
 
 TODO
 ===============================================================================
-* AtomDateConstruct �N���X�� LocalName �� modified ����Ȃ��āAupdated ����Ȃ�
-  �́H
-* ���O�����Ƃɖ߂����ǂ����B
+* AtomDateConstruct クラスの LocalName は modified じゃなくて、updated じゃない
+  の？
+* 名前をもとに戻すかどうか。
