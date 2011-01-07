@@ -1,0 +1,62 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0714FE1F-B020-44A8-B207-B747811D3999}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Atom.net.alt</RootNamespace>
+    <AssemblyName>Atom.net.alt</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\lib\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\lib\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Atom\Core\AtomContent.cs" />
+    <Compile Include="Atom\Core\AtomContentBase.cs" />
+    <Compile Include="Atom\Core\AtomElement.cs" />
+    <Compile Include="Atom\Core\AtomFeed.cs" />
+    <Compile Include="Atom\Core\AtomReader.cs" />
+    <Compile Include="Atom\Core\Collections\AtomContentCollection.cs" />
+    <Compile Include="Atom\Core\EncodedMode.cs" />
+    <Compile Include="Atom\Core\Language.cs" />
+    <Compile Include="Atom\Core\MediaType.cs" />
+    <Compile Include="Atom\Core\RequiredAttributeNotFoundException.cs" />
+    <Compile Include="Atom\Core\RequiredElementNotFoundException.cs" />
+    <Compile Include="Atom\Utils\AtomUtility.cs" />
+    <Compile Include="Atom\Utils\Base64.cs" />
+    <Compile Include="Atom\Utils\DefaultValues.cs" />
+    <Compile Include="MvpXml\XMLNamespaces.cs" />
+    <Compile Include="MvpXml\XPathNavigatorReader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
