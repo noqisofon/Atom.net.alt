@@ -7,7 +7,7 @@
     <ProjectGuid>{0714FE1F-B020-44A8-B207-B747811D3999}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atom.net.alt</RootNamespace>
+    <RootNamespace>Atom.net</RootNamespace>
     <AssemblyName>Atom.net.alt</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

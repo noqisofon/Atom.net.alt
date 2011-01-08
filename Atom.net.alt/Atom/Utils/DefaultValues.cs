@@ -45,7 +45,7 @@ namespace Atom.Utils {
         /// <summary>
         /// 
         /// </summary>
-        internal static MediaType atomMediaType {
+        internal static MediaType AtomMediaType {
             get {
                 return atom_media_type;
             }
@@ -61,7 +61,7 @@ namespace Atom.Utils {
         /// <summary>
         /// 
         /// </summary>
-        internal static MediaType mediaType {
+        internal static MediaType MediaType {
             get {
                 return media_type;
             }
@@ -77,7 +77,7 @@ namespace Atom.Utils {
         /// <summary>
         /// 
         /// </summary>
-        internal static EncodedMode encodedMode {
+        internal static EncodedMode EncodedMode {
             get { return encoded_mode_; }
         }
 

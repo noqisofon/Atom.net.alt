@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atom.net.alt", "Atom.net.alt\Atom.net.alt.csproj", "{0714FE1F-B020-44A8-B207-B747811D3999}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atom.net.alt2005", "Atom.net.alt\Atom.net.alt2005.csproj", "{0714FE1F-B020-44A8-B207-B747811D3999}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

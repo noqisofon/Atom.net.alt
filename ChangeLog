@@ -1,3 +1,24 @@
+commit 5a4b9afa9e985f59001d06f6681d01f8123bd763
+Author: rihine <ned.rihine@gmail.com>
+Date:   Sat Jan 8 07:13:16 2011 +0900
+
+    * VS2008 —p‚Éƒ\ƒŠƒ…[ƒVƒ‡ƒ“‚ğì‚è‚Ü‚µ‚½B
+
+commit 076554bb841104650ae063a026255002ecb772f5
+Author: noqisofon <ned.rihihe@gmail.com>
+Date:   Fri Jan 7 17:53:39 2011 +0900
+
+    * è‰²ã€…è¿½åŠ ã—ã¾ã—ãŸã€‚
+    
+    + AtomDateConstruct.cs
+    + AtomGenerator.cs
+    + AtomLink.cs
+    + AtomPersonConstruct.cs
+    + Collections/AtomLinkCollection.cs
+    + Collections/AtomPersonConstructCollection
+    + Relationship.cs
+    + s/AtomContentBase/AtomContentConstruct/g
+
 commit e381c5b813c074405097b38a811cacec3515d6d0
 Author: noqisofon <ned.rihihe@gmail.com>
 Date:   Fri Jan 7 15:52:27 2011 +0900

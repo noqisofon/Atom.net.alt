@@ -38,7 +38,7 @@ namespace Atom.Core {
         /// <param name="local_name"></param>
         /// <param name="content"></param>
         public AtomContentConstruct(string local_name, string content)
-            : this( local_name, content, DefaultValues.mediaType, DefaultValues.encodedMode ) {
+            : this( local_name, content, DefaultValues.MediaType, DefaultValues.EncodedMode ) {
 
         }
         /// <summary>
@@ -48,7 +48,7 @@ namespace Atom.Core {
         /// <param name="content"></param>
         /// <param name="type"></param>
         public AtomContentConstruct(string local_name, string content, MediaType type)
-            : this( local_name, content, type, DefaultValues.encodedMode ) {
+            : this( local_name, content, type, DefaultValues.EncodedMode ) {
 
         }
         /// <summary>
@@ -135,12 +135,12 @@ namespace Atom.Core {
             if ( ( this.Type == MediaType.UnknownType )
                  || ( this.Type == MediaType.ApplicationAtomXml )
                  || ( this.Type == MediaType.ApplicationXAtomXml ) )
-                this.Type = DefaultValues.mediaType;
+                this.Type = DefaultValues.MediaType;
 
-            if ( this.Type != DefaultValues.mediaType )
+            if ( this.Type != DefaultValues.MediaType )
                 base.writeAttribute( "type", AtomUtility.mediaTypeAsString( this.Type ), false, null );
 
-            if ( this.Mode != DefaultValues.encodedMode )
+            if ( this.Mode != DefaultValues.EncodedMode )
                 base.writeAttribute( "mode", this.Mode.ToString().ToLower(), false, null );
 
             base.writeAttribute( "xml:lang", AtomUtility.languageAsString( base.XmlLang ).ToString(), false, null );
@@ -237,11 +237,11 @@ namespace Atom.Core {
         /// <summary>
         /// 
         /// </summary>
-        private MediaType type_ = DefaultValues.mediaType;
+        private MediaType type_ = DefaultValues.MediaType;
         /// <summary>
         /// 
         /// </summary>
-        private EncodedMode mode_ = DefaultValues.encodedMode;
+        private EncodedMode mode_ = DefaultValues.EncodedMode;
         /// <summary>
         /// 
         /// </summary>

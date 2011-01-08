@@ -100,7 +100,6 @@ namespace Atom.Core {
         /// <param name="uri"></param>
         /// <returns></returns>
         public static AtomFeed Load(Uri uri) {
-
             return Load( uri.ToString() );
         }
 

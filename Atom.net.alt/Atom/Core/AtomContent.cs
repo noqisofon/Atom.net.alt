@@ -23,14 +23,14 @@ namespace Atom.Core {
         /// 
         /// </summary>
         public AtomContent()
-            : this( string.Empty, DefaultValues.mediaType, DefaultValues.encodedMode ) {
+            : this( string.Empty, DefaultValues.MediaType, DefaultValues.EncodedMode ) {
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="content"></param>
         public AtomContent(string content)
-            : this( content, DefaultValues.mediaType, DefaultValues.encodedMode ) {
+            : this( content, DefaultValues.MediaType, DefaultValues.EncodedMode ) {
 
         }
         /// <summary>
@@ -39,7 +39,7 @@ namespace Atom.Core {
         /// <param name="content"></param>
         /// <param name="type"></param>
         public AtomContent(string content, MediaType type)
-            : this( content, type, DefaultValues.encodedMode ) {
+            : this( content, type, DefaultValues.EncodedMode ) {
 
         }
         /// <summary>
@@ -48,7 +48,7 @@ namespace Atom.Core {
         /// <param name="content"></param>
         /// <param name="mode"></param>
         public AtomContent(string content, EncodedMode mode)
-            : this( content, DefaultValues.mediaType, mode ) {
+            : this( content, DefaultValues.MediaType, mode ) {
 
         }
         /// <summary>
@@ -72,14 +72,14 @@ namespace Atom.Core {
             if ( ( this.Type == MediaType.UnknownType )
                  || ( this.Type == MediaType.ApplicationAtomXml )
                  || ( this.Type == MediaType.ApplicationXAtomXml ) )
-                this.Type = DefaultValues.mediaType;
+                this.Type = DefaultValues.MediaType;
 
             base.writeAttribute( "xml:base", base.XmlBase, false, null );
 
-            if ( this.Type != DefaultValues.mediaType )
+            if ( this.Type != DefaultValues.MediaType )
                 base.writeAttribute( "type", AtomUtility.mediaTypeAsString( this.Type ), false, null );
 
-            if ( this.Mode != DefaultValues.encodedMode )
+            if ( this.Mode != DefaultValues.EncodedMode )
                 base.writeAttribute( "mode", this.Mode.ToString().ToLower(), false, null );
 
             base.writeAttribute( "xml:lang", AtomUtility.languageAsString( base.XmlLang ).ToString(), false, null );
