@@ -24,7 +24,7 @@ namespace Atom.Core {
         /// 
         /// </summary>
         public AtomLink()
-            : this( DefaultValues.Uri, DefaultValues.rel, DefaultValues.MediaType, string.Empty ) {
+            : this( DefaultValues.Uri, DefaultValues.Rel, DefaultValues.MediaType, string.Empty ) {
         }
         /// <summary>
         /// 
@@ -167,7 +167,7 @@ namespace Atom.Core {
                 }
             }
 
-            it = temp_navigator( "@*" );
+            it = temp_navigator.Select( "@*" );
             do {
                 switch ( it.Current.Name.ToLower() ) {
                     case "rel":

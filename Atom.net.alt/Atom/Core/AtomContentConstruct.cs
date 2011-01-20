@@ -120,7 +120,7 @@ namespace Atom.Core {
                 base.buffer.Append( this.Content );
                 this.writeEndElement();
 
-                return this.buffer.ToString();
+                return base.buffer.ToString();
             } finally {
                 base.buffer.Length = 0;
             }
@@ -128,7 +128,7 @@ namespace Atom.Core {
         #endregion ToString-method
 
 
-        #region ToString-helper-methods
+        #region writing-stuff
         protected internal override void writeStartElement() {
             base.buffer.AppendFormat( "<{0}", this.LocalName );
 
@@ -154,7 +154,7 @@ namespace Atom.Core {
         protected internal override void writeEndElement() {
             this.buffer.AppendFormat( "</{0}>", this.LocalName ).AppendLine();
         }
-        #endregion ToString-helper-methods
+        #endregion writing-stuff
 
 
         #region xpath-parsing-stuff

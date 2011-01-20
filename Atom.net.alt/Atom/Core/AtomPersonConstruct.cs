@@ -163,7 +163,7 @@ namespace Atom.Core {
                     case "contributor":
                     case "author":
                         try {
-                            result.XmlLang = AtomUtility.languageAsString( it.Current.XmlLang );
+                            result.XmlLang = AtomUtility.parseLanguage( it.Current.XmlLang );
                         } catch { }
                         result.LocalName = name;
                         break;

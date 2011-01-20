@@ -23,25 +23,25 @@ namespace Atom.Utils {
         /// 
         /// </summary>
         static AtomUtility() {
-            Assembly module = Assembly.GetExecutingAssembly();
-            Stream stream = module.GetManifestResourceStream( "Atom.NET.mediatypes.txt" );
+            //Assembly module = Assembly.GetExecutingAssembly();
+            //Stream stream = module.GetManifestResourceStream( "Atom.NET.mediatypes.txt" );
             mediaTypes = new Dictionary<int, string>();
 
-            using ( StreamReader reader = new StreamReader( stream ) ) {
-                string line = string.Empty;
-                string type = string.Empty;
+            //using ( StreamReader reader = new StreamReader( stream ) ) {
+            //    string line = string.Empty;
+            //    string type = string.Empty;
 
-                int i = 0;
+            //    int i = 0;
 
-                line = reader.ReadLine();
-                while ( line != null ) {
-                    type = line.Split( new char[] { ' ' }, 2 )[0];
-                    mediaTypes.Add( i, type );
+            //    line = reader.ReadLine();
+            //    while ( line != null ) {
+            //        type = line.Split( new char[] { ' ' }, 2 )[0];
+            //        mediaTypes.Add( i, type );
 
-                    ++i;
-                    line = reader.ReadLine();
-                }
-            }
+            //        ++i;
+            //        line = reader.ReadLine();
+            //    }
+            //}
         }
         #endregion constructor
 
@@ -73,10 +73,10 @@ namespace Atom.Utils {
         /// <param name="the_date"></param>
         /// <returns></returns>
         public static bool IsIso8601Date(string the_date) {
-            string rexpression =  @"\d\d\d\d(-\d\d(-\d\d(T\d\d:\d\d(:\d\d(\.\d*)?)?(Z|([+-]\d\d:\d\d))?)?)?)?$";
+            string rexpression = @"\d\d\d\d(-\d\d(-\d\d(T\d\d:\d\d(:\d\d(\.\d*)?)?(Z|([+-]\d\d:\d\d))?)?)?)?$";
             Regex re = new Regex( rexpression, RegexOptions.IgnoreCase );
 
-            if (re.IsMatch(the_date))
+            if ( re.IsMatch( the_date ) )
                 return true;
 
             return false;
@@ -100,9 +100,35 @@ namespace Atom.Utils {
             }
             return false;
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public static bool IsEmail(string email) {
+            string rexpression = @"([a-zA-Z0-9_\-\+\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}[0-9]{1,3})(\]?)$";
+
+            Regex re = new Regex( rexpression, RegexOptions.IgnoreCase | RegexOptions.Multiline );
+
+            return re.IsMatch( email ) ? true : false;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static string GetVersion() {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            return assembly.GetName().Version.ToString();
+        }
         #endregion public-methods
 
 
+        #region internal-methods
         /// <summary>
         /// 
         /// </summary>
@@ -174,6 +200,63 @@ namespace Atom.Utils {
             }
             return result;
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="relation_ship"></param>
+        /// <returns></returns>
+        internal static string relationshipAsString(Relationship relation_ship) {
+            string result = Enum.GetName( typeof( Relationship ), relation_ship ).ToLower();
+
+            if ( result.IndexOf( "service" ) == 0 )
+                result = result.Insert( "service".Length, "." );
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="relation_ship"></param>
+        /// <returns></returns>
+        internal static Relationship parseRelationship(string relation_ship) {
+            Relationship result;
+
+            switch ( relation_ship ) {
+                case "start":
+                    result = Relationship.Start;
+                    break;
+
+                case "next":
+                    result = Relationship.Next;
+                    break;
+
+                case "prev":
+                    result = Relationship.Prev;
+                    break;
+
+                case "service.edit":
+                    result = Relationship.ServiceEdit;
+                    break;
+
+                case "service.post":
+                    result = Relationship.ServicePost;
+                    break;
+
+                case "service.feed":
+                    result = Relationship.ServiceFeed;
+                    break;
+
+                default:
+                    result = Relationship.Alternate;
+                    break;
+            }
+            return result;
+        }
+        #endregion internal-methods
 
 
         /// <summary>

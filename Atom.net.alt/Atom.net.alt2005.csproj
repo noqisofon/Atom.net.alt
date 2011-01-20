@@ -38,15 +38,19 @@
     <Compile Include="Atom\Core\AtomContentConstruct.cs" />
     <Compile Include="Atom\Core\AtomDateConstruct.cs" />
     <Compile Include="Atom\Core\AtomElement.cs" />
+    <Compile Include="Atom\Core\AtomEntry.cs" />
     <Compile Include="Atom\Core\AtomFeed.cs" />
     <Compile Include="Atom\Core\AtomGenerator.cs" />
     <Compile Include="Atom\Core\AtomLink.cs" />
     <Compile Include="Atom\Core\AtomPersonConstruct.cs" />
-    <Compile Include="Atom\Core\AtomReader.cs" />
+    <Compile Include="Atom\AtomReader.cs" />
+    <Compile Include="Atom\AtomWriter.cs" />
     <Compile Include="Atom\Core\Collections\AtomContentCollection.cs" />
     <Compile Include="Atom\Core\Collections\AtomLinkCollection.cs" />
     <Compile Include="Atom\Core\Collections\AtomPersonConstructCollection.cs" />
-    <Compile Include="Atom\Core\EncodedMode.cs" />
+    <Compile Include="Atom\Core\EncodedMode.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Atom\Core\Language.cs" />
     <Compile Include="Atom\Core\MediaType.cs" />
     <Compile Include="Atom\Core\Relationship.cs" />

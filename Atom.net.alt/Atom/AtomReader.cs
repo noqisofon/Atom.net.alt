@@ -6,7 +6,7 @@ using System.Xml;
 using System.Xml.XPath;
 
 
-namespace Atom.Core {
+namespace Atom {
 
 
     using Utils;

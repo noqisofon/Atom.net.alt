@@ -1,5 +1,6 @@
 /* -*- encoding: utf-8 -*- */
 using System;
+using System.IO;
 using System.Net;
 using System.Text;
 using System.Xml;
@@ -73,6 +74,42 @@ namespace Atom.Core {
         /// <summary>
         /// 
         /// </summary>
+        public AtomPersonConstructCollection Contributors {
+            get {
+                return this.contributors_;
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public AtomContentConstruct Tagline {
+            get {
+                return this.tagline_;
+            }
+            set {
+                this.tagline_ = value;
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Uri Id {
+            get {
+                return this.id_;
+            }
+            set {
+                this.id_ = value;
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         public Uri Uri {
             get {
                 return this.feed_uri_;
@@ -81,18 +118,189 @@ namespace Atom.Core {
                 this.feed_uri_ = value;
             }
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public AtomContentConstruct Copyright {
+            get {
+                return this.copyright_;
+            }
+            set {
+                this.copyright_ = value;
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public AtomContentConstruct Info {
+            get {
+                return this.info_;
+            }
+            set {
+                this.info_ = value;
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public AtomDateConstruct Updated {
+            get {
+                return this.updated_;
+            }
+            set {
+                this.updated_ = value;
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Encoding Encoding {
+            get { return this.encoding_; }
+            set { this.encoding_ = value; }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public override string LocalName {
+            get { return "feed"; }
+        }
         #endregion properties
 
 
+        #region ToString-methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() {
+            this.writeStartElement();
+            {
+                if ( this.Title == null )
+                    throw new RequiredElementNotFoundException( "The title element must be specified." );
+
+
+                foreach ( AtomLink link in this.Links )
+                    base.buffer.Append( link.ToString() );
+
+                foreach ( AtomEntry entry in this.Entries ) {
+                    if ( !entry.doAuthor ) {
+                        if ( this.Author == null )
+                            throw new RequiredElementNotFoundException( "The author element must be specified." );
+
+                        base.buffer.Append( this.Author.ToString() );
+
+                        break;
+                    } else
+                        break;
+                }
+
+                foreach ( AtomPersonConstruct contributor in this.Contributors )
+                    base.buffer.Append( contributor.ToString() );
+
+                if ( this.Tagline != null )
+                    base.buffer.Append( this.Tagline.ToString() );
+                if ( this.Id != DefaultValues.Uri )
+                    base.writeElement( "id", this.Id, false, null );
+
+                base.buffer.Append( this.generator_.ToString() );
+
+                if ( this.Info != null )
+                    base.buffer.Append( this.Info.ToString() );
+                if ( this.Updated == null )
+                    throw new RequiredElementNotFoundException( "The updated element must be specified." );
+
+                base.buffer.Append( this.Updated.ToString() );
+
+                foreach ( ScopedElement element in AddtionalElements )
+                    base.buffer.Append( element.ToString() );
+            }
+            this.writeEndElement();
+            try {
+                return base.buffer.ToString();
+            } finally {
+                base.buffer.Length = 0;
+            }
+        }
+        #endregion ToString-methods
+
+
+        #region writing-stuff
+        /// <summary>
+        /// 
+        /// </summary>
+        protected internal override void writeStartElement() {
+            base.buffer.AppendFormat( "<{0}", this.LocalName );
+            {
+                base.writeAttribute( "version", DefaultValues.AtomVersion, false, null );
+                if ( this.XmlLang != Language.UnknownLanguage )
+                    base.writeAttribute( "xml:lang", AtomUtility.languageAsString( this.XmlLang ), false, null );
+                if ( this.NamespaceUri != null && !string.IsNullOrEmpty( this.NamespaceUri.ToString() ) )
+                    base.writeAttribute( "xmlns", this.NamespaceUri, false, null );
+            }
+            base.buffer.AppendLine( ">" );
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        protected internal override void writeEndElement() {
+            base.buffer.AppendFormat( "</{0}>", this.LocalName ).AppendLine();
+        }
+        #endregion writing-stuff
+
+
+        #region save-methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="stream"></param>
+        public void Save(Stream stream) {
+            writer = new AtomWriter( stream, this.Encoding );
+
+            writer.write( this );
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filename"></param>
+        public void Save(string filename) {
+            writer = new AtomWriter( filename, this.Encoding );
+
+            writer.write( this );
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text_writer"></param>
+        public void Save(TextWriter text_writer) {
+            writer = new AtomWriter( text_writer );
+
+            writer.write( this );
+        }
+        #endregion save-methods
+
+
+        #region load-methods
         /// <summary>
         /// 
         /// </summary>
         /// <param name="uri"></param>
         /// <returns></returns>
         public static AtomFeed Load(string uri) {
-            Reader = new AtomReader( uri );
+            reader = new AtomReader( uri );
 
-            return parse( Reader.navigator );
+            return parse( reader.navigator );
         }
         /// <summary>
         /// 
@@ -102,6 +310,7 @@ namespace Atom.Core {
         public static AtomFeed Load(Uri uri) {
             return Load( uri.ToString() );
         }
+        #endregion load-methods
 
 
         /// <summary>
@@ -172,6 +381,26 @@ namespace Atom.Core {
                     case "tagline":
                         result_feed.Tagline = AtomContent.parse( it.Current );
                         break;
+
+                    case "id":
+                        result_feed.Id = new Uri( it.Current.Value );
+                        break;
+
+                    case "copyright":
+                        result_feed.Copyright = AtomContentConstruct.parse( it.Current );
+                        break;
+
+                    case "info":
+                        result_feed.Info = AtomContentConstruct.parse( it.Current );
+                        break;
+
+                    case "updated":
+                        result_feed.Updated = AtomDateConstruct( it.Current );
+                        break;
+
+                    case "entry":
+                        result_feed.Add( AtomEntry.Parse( it.Current ) );
+                        break;
                 }
             } while ( it.MoveNext() );
 
@@ -235,7 +464,7 @@ namespace Atom.Core {
         /// <summary>
         /// 
         /// </summary>
-        private AtomPersonConstructCollection contributors = new AtomPersonConstructCollection();
+        private AtomPersonConstructCollection contributors_ = new AtomPersonConstructCollection();
         /// <summary>
         /// 
         /// </summary>
@@ -264,13 +493,22 @@ namespace Atom.Core {
         /// 
         /// </summary>
         private AtomDateConstruct updated_ = null;
+        /// <summary>
+        /// 
+        /// </summary>
+        private Encoding encoding_ = DefaultValues.Encoding;
         #endregion fields
 
 
         /// <summary>
         /// 
         /// </summary>
-        private static AtomReader Reader = null;
+        private static AtomReader reader = null;
+        /// <summary>
+        /// 
+        /// </summary>
+        private static AtomWriter writer = null;
+
     }
 
 

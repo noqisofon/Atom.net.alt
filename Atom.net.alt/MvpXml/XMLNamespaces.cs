@@ -14,6 +14,10 @@ namespace MvpXml {
         /// 
         /// </summary>
         public const string XmlNs = "http://www.w3.org/2000/xmlns/";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string XmlNsPrefix = "xmlns";
     }
 
 

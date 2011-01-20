@@ -63,9 +63,10 @@ namespace Atom.Core {
         #endregion constructors
 
 
-
-
         #region ToString-helper-methods
+        /// <summary>
+        /// 
+        /// </summary>
         protected internal override void writeStartElement() {
             this.buffer.AppendFormat( "<{0}", this.LocalName );
 
@@ -130,7 +131,9 @@ namespace Atom.Core {
                     case "type":
                         result_content.Type = AtomUtility.parseMediaType( it.Current.Value );
                         break;
-
+                    /*
+                     * mode ‚Í‚È‚³‚»‚¤‚¾cB
+                     */
                     case "mode":
                         switch ( it.Current.Value.ToLower() ) {
                             case "escaped":
